@@ -3,7 +3,7 @@ package signx
 import (
 	"encoding/json"
 	"fmt"
-	"gitee.com/guangzhou_yuanyuan_network/common/sortx"
+	"github.com/GoEnthusiast/gin-common/sortx"
 	"testing"
 )
 
@@ -16,7 +16,7 @@ const (
 func TestSign_Encry(t *testing.T) {
 	// 加密
 	encodeEn := NewSignx(
-		//WithPath("/api/v1/spider/asa/object/find-campaigns"),
+		WithPath("/api/v1/spider/asa/object/find-campaigns"),
 		WithSalt("yyy-mobile:spider-server-go"),
 	)
 	reqParamStr := sortx.SortString(TESTPARAM3, sortx.ASC)
@@ -29,7 +29,7 @@ func TestSign_Encry(t *testing.T) {
 }
 
 func TestSign_Decry(t *testing.T) {
-	signStr := "WEA6BzcyI1Q9DxFEKzZoEAwhLxVOAwMIC15QURIoOxQHQBgJPx8aCRBqNRUbFy9eDyhbEDYibAohBwgIE3olFigxCRlOVVYAHTwUFDUlPxU0bD00OzFQN34mUDoVIjRDBjhMER1qARkABBQVWCQcWSkPMFspCCgMPyp8EC9aVhhdBEAUWEMWShoUDBZKE14SSh0UDxdOE0AfEBdJQAwDBBwEUxQeGiRGQxVCUkNBU0YYXl85Wko="
+	signStr := "dzcxHikxO1Q9IStEK0JrJD5JKz9/XQMoPQdQaiZCLww8QH8YPzUkDihqNQMjLi9BNzg0BDYIYB4qWwAVE3ofFRMhCQJMMAMKGz5VHg0lWBkHV0YFCwlcBE9BXAQUV0taBDczABpDJxYBByYfWUA+EwAtIB0XLSBHASpBUi9aVhhdBEAUWEMWShoUDBZKE14SSh0UDxdOE0AfEBdJQAwDBBwEUxQeGiRGQB9DVkNHUEEeU1g5Wko="
 	decodeEn := NewSignx(
 		WithPath("/api/v1/spider/asa/object/find-campaigns"), // 要与加密设置一致，否则会解密失败
 		WithSalt("yyy-mobile:spider-server-go"),              // 要与加密设置一致，否则会解密失败
@@ -40,7 +40,7 @@ func TestSign_Decry(t *testing.T) {
 		fmt.Printf("error: %s\n", err.Error())
 		return
 	}
-	if patams != TESTPARAM3 {
+	if patams != sortx.SortString(TESTPARAM3, sortx.ASC) {
 		fmt.Printf("error: %s\n", "解析参数与测试参数不相等")
 		return
 	}
