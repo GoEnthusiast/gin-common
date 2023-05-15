@@ -1,7 +1,6 @@
 package logx
 
 import (
-	"fmt"
 	"github.com/natefinch/lumberjack"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
@@ -31,7 +30,8 @@ func getEncoder() zapcore.Encoder {
 func getLogWriter(fileOut bool, filename string, maxSize, maxBackups, maxAge int, compress bool) zapcore.WriteSyncer {
 	if fileOut {
 		lumberJackLogger := &lumberjack.Logger{
-			Filename:   fmt.Sprintf("./static/%s", filename),
+			//Filename:   fmt.Sprintf("./static/%s", filename),
+			Filename:   filename,
 			MaxSize:    maxSize,
 			MaxBackups: maxBackups,
 			MaxAge:     maxAge,
