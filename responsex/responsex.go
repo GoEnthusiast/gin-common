@@ -40,7 +40,7 @@ func WriteJson(ginCtx *gin.Context, resp interface{}, err error) {
 			ginCtx.JSON(er.StatusCode(), &result{
 				Code:  er.Code(),
 				Msg:   er.Msg(),
-				Body:  nil,
+				Body:  resp,
 				Error: er.Details(),
 			})
 			return
@@ -48,7 +48,7 @@ func WriteJson(ginCtx *gin.Context, resp interface{}, err error) {
 		ginCtx.JSON(e.StatusCode(), &result{
 			Code:  e.Code(),
 			Msg:   e.Msg(),
-			Body:  nil,
+			Body:  resp,
 			Error: e.Details(),
 		})
 	}
